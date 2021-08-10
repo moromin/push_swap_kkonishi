@@ -52,10 +52,3 @@ void	init_node(t_node *a, int args, char *argv[])
 		i++;
 	}
 }
-
-// TODO
-// Delete all node when malloc is fail
-// void	delete_node_error(t_node *node)
-// {
-
-// }

@@ -13,8 +13,6 @@ void	argument_check(int args, char *argv[])
 			exit(EXIT_FAILURE);
 		if (ft_integer_check(argv[i]))
 			exit(EXIT_FAILURE);
-		// if (ft_duplicate_check(argv[i]))
-		// 	exit(EXIT_FAILURE);
 		i++;
 	}
 }
@@ -45,13 +43,4 @@ int	main(int args, char *argv[])
 		a = a->next;
 	}
 	printf("node_size:%lu\n", size);
-	// TODO
-	// node size check to sort
-	// int	flag;
-	// flag = node_size();
-
-	// while (i < args)
-	// {
-	// 	printf("'%s'\n", argv[i++]);
-	// }
 }
