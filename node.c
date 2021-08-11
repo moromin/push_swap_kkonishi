@@ -23,6 +23,7 @@ static void	add_node(t_node *head, int val)
 	if (!new)
 	{
 		write(1, "Error\n", 6);
+		free_all_node(head);
 		exit(EXIT_FAILURE);
 	}
 	new->val = val;
@@ -38,7 +39,7 @@ void	init_node(t_node *a, int args, char *argv[])
 	size_t	j;
 
 	i = 1;
-	while (i < args)
+	while (i < (size_t)args)
 	{
 		j = 0;
 		while (argv[i][j])
@@ -51,4 +52,20 @@ void	init_node(t_node *a, int args, char *argv[])
 		}
 		i++;
 	}
+}
+
+void	free_all_node(t_node *node)
+{
+	t_node	*head;
+	t_node	*tmp;
+
+	head = node;
+	node = node->next;
+	while (node != head)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
+	free(head);
 }

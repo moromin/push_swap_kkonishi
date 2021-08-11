@@ -7,7 +7,7 @@ void	argument_check(int args, char *argv[])
 	if (args < 2)
 		exit(EXIT_FAILURE);
 	i = 1;
-	while (i < args)
+	while (i < (size_t)args)
 	{
 		if (ft_isdigit_str(argv[i]))
 			exit(EXIT_FAILURE);
@@ -17,6 +17,18 @@ void	argument_check(int args, char *argv[])
 	}
 }
 
+void	branch_node_size(t_node *a, t_node *b, size_t size)
+{
+	if (size == 2)
+		size_two(a);
+	else if (size == 3)
+		size_three(a);
+	else if (size <= 6)
+		size_until_six(a, b, size);
+	else
+		size_over_six(a, b);
+}
+
 int	main(int args, char *argv[])
 {
 	t_node	*a;
@@ -24,23 +36,38 @@ int	main(int args, char *argv[])
 	size_t	size;
 
 	a = head_node();
-	b = head_node();
 	argument_check(args, argv);
 	init_node(a, args, argv);
 	size = node_check(a);
+	b = head_node();
+	branch_node_size(a, b, size);
 
 	// To confirm node
-	t_node	*tmp;
+	t_node	*head_a;
+	t_node	*head_b;
 	int		i;
 
-	tmp = a;
+	head_a = a;
+	head_b = b;
 	i = 0;
 	a = a->next;
-	while (a != tmp)
+	while (a != head_a)
 	{
 		i++;
-		printf("val%d:%d\n", i, a->val);
+		printf("a%d:%d\n", i, a->val);
 		a = a->next;
 	}
-	printf("node_size:%lu\n", size);
+	i = 0;
+	b = b->next;
+	while (b != head_b)
+	{
+		i++;
+		printf("b%d:%d\n", i, b->val);
+		b = b->next;
+	}
+
+	// leaks check
+	free_all_node(a);
+	free_all_node(b);
+	// system("leaks push_swap");
 }

@@ -15,6 +15,7 @@ static void	node_dup_check(t_node *a)
 			if (a->val == tmp->val)
 			{
 				write(1, "Error\n", 6);
+				free_all_node(head);
 				exit(EXIT_FAILURE);
 			}
 			tmp = tmp->next;
@@ -55,7 +56,10 @@ static void	node_sorted_check(t_node *a, size_t size)
 		a = a->next;
 	}
 	if (i + 1 == size)
+	{
+		free_all_node(head);
 		exit(EXIT_SUCCESS);
+	}
 }
 
 size_t	node_check(t_node *a)
