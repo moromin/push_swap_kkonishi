@@ -19,9 +19,9 @@ int	ft_isdigit_str(char *str)
 			return (write(1, "Error\n", 6));
 		if (str[i] == '-')
 			flag = 1;
-		tmp = str[i];
 		if (str[i++] == ' ')
 			flag = 0;
+		tmp = str[i];
 		if (flag)
 		{
 			if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '\0')

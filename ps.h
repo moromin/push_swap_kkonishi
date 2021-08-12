@@ -11,6 +11,7 @@
 typedef struct s_node
 {
 	int				val;
+	size_t			index;
 	struct s_node	*prev;
 	struct s_node	*next;
 }	t_node;
@@ -36,10 +37,12 @@ void	size_three_case(t_node *a, int x, int y, int z);
 void	size_three(t_node *a);
 
 // branch_until_six.c
+size_t	min_search(t_node *a);
+size_t	max_search(t_node *a);
 void	size_until_six(t_node *a, t_node *b, size_t size);
 
 // branch_over_six.c
-void	size_over_six(t_node *a, t_node *b);
+void	size_over_six(t_node *a, t_node *b, size_t size);
 
 // action_main.c
 void	swap(t_node *node, int ab_flag, int same_flag);
@@ -51,5 +54,11 @@ void	push(t_node *n1, t_node *n2, int atob_flag);
 void	ss(t_node *a, t_node *b);
 void	rr(t_node *a, t_node *b);
 void	rrr(t_node *a, t_node *b);
+
+// compression_1.c
+void	compression_main(t_node *a, size_t size);
+
+// compression_2.c
+void	binary_search(t_node *a, size_t size, int *tab);
 
 #endif

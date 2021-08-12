@@ -1,6 +1,6 @@
 #include "ps.h"
 
-static size_t	min_search(t_node *a)
+size_t	min_search(t_node *a)
 {
 	t_node	*head;
 	int		min;
@@ -27,6 +27,33 @@ static size_t	min_search(t_node *a)
 	return (res);
 }
 
+size_t	max_search(t_node *a)
+{
+	t_node	*head;
+	int		max;
+	size_t	res;
+
+	head = a;
+	a = a->next;
+	max = a->val;
+	while (a != head)
+	{
+		if (max < a->val)
+			max = a->val;
+		a = a->next;
+	}
+	a = head->next;
+	res = 1;
+	while (a != head)
+	{
+		if (a->val == max)
+			break ;
+		res++;
+		a = a->next;
+	}
+	return (res);
+}
+
 static void	push_branch(t_node *a, t_node *b, size_t min_index, size_t size)
 {
 	if (min_index == size)
@@ -45,6 +72,7 @@ static void	push_branch(t_node *a, t_node *b, size_t min_index, size_t size)
 	}
 	else if (min_index == 4 && size > 5)
 	{
+		reverse_rotate(a, 1, 0);
 		reverse_rotate(a, 1, 0);
 		reverse_rotate(a, 1, 0);
 	}

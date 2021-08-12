@@ -26,7 +26,7 @@ void	branch_node_size(t_node *a, t_node *b, size_t size)
 	else if (size <= 6)
 		size_until_six(a, b, size);
 	else
-		size_over_six(a, b);
+		size_over_six(a, b, size);
 }
 
 int	main(int args, char *argv[])
