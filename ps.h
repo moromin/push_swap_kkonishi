@@ -27,6 +27,7 @@ typedef struct s_ps
 
 // main.c
 void	argument_check(int args, char *argv[]);
+void	branch_node_size(t_node *a, t_node *b, size_t size);
 
 // utils.c
 int		ft_isdigit_str(char *str);
