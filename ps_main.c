@@ -1,5 +1,23 @@
 #include "ps.h"
 
+static int	argv_empty_check(char *str)
+{
+	int		flag;
+	size_t	i;
+
+	flag = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) || str[i] == ' ' || str[i] == '-')
+			flag++;
+		i++;
+	}
+	if (!flag)
+		return (write(2, "Error\n", 6));
+	return (0);
+}
+
 void	argument_check(int args, char *argv[])
 {
 	size_t	i;
@@ -12,6 +30,8 @@ void	argument_check(int args, char *argv[])
 		if (ft_isdigit_str(argv[i]))
 			exit(EXIT_FAILURE);
 		if (ft_integer_check(argv[i]))
+			exit(EXIT_FAILURE);
+		if (argv_empty_check(argv[i]))
 			exit(EXIT_FAILURE);
 		i++;
 	}
@@ -41,6 +61,8 @@ int	main(int args, char *argv[])
 	size = node_check(a);
 	b = head_node();
 	branch_node_size(a, b, size);
+	free_all_node(a);
+	free_all_node(b);
 	return (0);
 }
 	// To confirm node

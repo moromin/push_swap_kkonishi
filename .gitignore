@@ -56,4 +56,4 @@ dkms.conf
 samples/
 test*
 push_swap*
-checker
+*checker*
