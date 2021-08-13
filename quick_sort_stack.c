@@ -143,7 +143,8 @@ void	b_to_a(t_node *a, t_node *b, size_t size)
 		}
 	}
 	while (count.rb-- > 0 && node_size(a) > 1)
-		reverse_rotate(b, 0, 0);
+		if (node_size(b) != size / 2)
+			reverse_rotate(b, 0, 0);
 	a_to_b(a, b, count.pa);
 	b_to_a(a, b, size - count.pa);
 }
@@ -151,6 +152,7 @@ void	b_to_a(t_node *a, t_node *b, size_t size)
 void	a_to_b(t_node *a, t_node *b, size_t size)
 {
 	t_ps	count;
+	size_t	current_size;
 	int		pivot;
 
 	init_count(&count, size);
@@ -168,8 +170,10 @@ void	a_to_b(t_node *a, t_node *b, size_t size)
 		else
 			count.ra += node_rotate(a, pivot, size);
 	}
+	current_size = node_size(a);
 	while (count.ra-- > 0 && node_size(a) > 1)
-		reverse_rotate(a, 1, 0);
+		if (count.origin / 2 != current_size)
+			reverse_rotate(a, 1, 0);
 	a_to_b(a, b, size);
 	b_to_a(a, b, count.pb);
 }
