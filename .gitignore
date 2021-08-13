@@ -55,5 +55,5 @@ dkms.conf
 .vscode/
 samples/
 test*
-push_swap_tester/
+push_swap*
 checker

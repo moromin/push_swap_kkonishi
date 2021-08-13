@@ -2,6 +2,7 @@ NAME		= push_swap
 SRCS		= 	main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c branch_over_six.c \
 				compression_1.c compression_2.c \
+				quick_sort_stack.c \
 				action_main.c
 # BONUS_SRCS	= get_next_line_bonus.c get_next_line_utils_bonus.c
 OBJS		= $(SRCS:%.c=%.o)

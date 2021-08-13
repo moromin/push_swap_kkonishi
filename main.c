@@ -43,28 +43,31 @@ int	main(int args, char *argv[])
 	branch_node_size(a, b, size);
 
 	// To confirm node
-	t_node	*head_a;
-	t_node	*head_b;
-	int		i;
+	// t_node	*head_a;
+	// t_node	*head_b;
+	// int		i;
 
-	head_a = a;
-	head_b = b;
-	i = 0;
-	a = a->next;
-	while (a != head_a)
-	{
-		i++;
-		printf("a%d:%d\n", i, a->val);
-		a = a->next;
-	}
-	i = 0;
-	b = b->next;
-	while (b != head_b)
-	{
-		i++;
-		printf("b%d:%d\n", i, b->val);
-		b = b->next;
-	}
+	// head_a = a;
+	// head_b = b;
+	// i = 0;
+	// a = a->next;
+	// printf("-------\n");
+	// while (a != head_a)
+	// {
+	// 	i++;
+	// 	printf("a%d:%d\n", i, a->val);
+	// 	a = a->next;
+	// }
+	// i = 0;
+	// b = b->next;
+	// printf("-------\n");
+	// while (b != head_b)
+	// {
+	// 	i++;
+	// 	printf("b%d:%d\n", i, b->val);
+	// 	b = b->next;
+	// }
+	// printf("-------\n");
 
 	// leaks check
 	free_all_node(a);

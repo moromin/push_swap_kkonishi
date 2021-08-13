@@ -31,7 +31,7 @@ static size_t	partition(int tab[], size_t l, size_t r)
 	return (i);
 }
 
-static void	quick_sort_array(int tab[], size_t l, size_t r)
+void	quick_sort_array(int tab[], size_t l, size_t r)
 {
 	size_t	pivot;
 
@@ -44,15 +44,13 @@ static void	quick_sort_array(int tab[], size_t l, size_t r)
 	}
 }
 
-static void	storage_value(t_node *a, int *tab)
+void	storage_value(t_node *a, int *tab, size_t size)
 {
 	size_t	i;
-	t_node	*head;
 
 	i = 0;
-	head = a;
 	a = a->next;
-	while (a != head)
+	while (i < size)
 	{
 		tab[i] = a->val;
 		i++;
@@ -70,18 +68,8 @@ void	compression_main(t_node *a, size_t size)
 		write(1, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
-	storage_value(a, tab);
+	storage_value(a, tab, size);
 	quick_sort_array(tab, 0, size - 1);
 	binary_search(a, size, tab);
-	// // confirm tab
-	// t_node	*head;
-	// head = a;
-	// a = a->next;
-	// while (a != head)
-	// {
-	// 	printf("a[%lu]:%d\n", a->index, a->val);
-	// 	a = a->next;
-	// }
-
 	free(tab);
 }

@@ -33,6 +33,11 @@ static void	add_node(t_node *head, int val)
 	head->prev = new;
 }
 
+static int	argv_check(char c)
+{
+	return (ft_isdigit(c) || c == '-');
+}
+
 void	init_node(t_node *a, int args, char *argv[])
 {
 	size_t	i;
@@ -45,9 +50,9 @@ void	init_node(t_node *a, int args, char *argv[])
 		while (argv[i][j])
 		{
 			add_node(a, ft_atoi(&argv[i][j]));
-			while ((ft_isdigit(argv[i][j]) || argv[i][j] == '-') && argv[i][j])
+			while (!argv_check(argv[i][j]) && argv[i][j])
 				j++;
-			while (!(ft_isdigit(argv[i][j]) || argv[i][j] == '-') && argv[i][j])
+			while (argv_check(argv[i][j]) && argv[i][j])
 				j++;
 		}
 		i++;
