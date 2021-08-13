@@ -19,7 +19,10 @@ typedef struct s_node
 typedef struct s_ps
 {
 	size_t	pb;
+	size_t	ra;
 	size_t	rb;
+	size_t	pa;
+	size_t	origin;
 }	t_ps;
 
 // main.c
@@ -68,6 +71,7 @@ void	storage_value(t_node *a, int *tab, size_t size);
 
 // compression_2.c
 void	binary_search(t_node *a, size_t size, int *tab);
+void	init_count(t_ps *count, size_t size);
 
 // quick_sort_stack.c
 void	sort_stack(t_node *a, t_node *b, size_t size);

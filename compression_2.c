@@ -1,5 +1,14 @@
 #include "ps.h"
 
+void	init_count(t_ps *count, size_t size)
+{
+	count->origin = size;
+	count->pa = 0;
+	count->pb = 0;
+	count->ra = 0;
+	count->rb = 0;
+}
+
 static size_t	search_main(int *tab, int target, size_t size)
 {
 	size_t	midid;

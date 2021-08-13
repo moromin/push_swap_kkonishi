@@ -41,7 +41,8 @@ int	main(int args, char *argv[])
 	size = node_check(a);
 	b = head_node();
 	branch_node_size(a, b, size);
-
+	return (0);
+}
 	// To confirm node
 	// t_node	*head_a;
 	// t_node	*head_b;
@@ -70,7 +71,6 @@ int	main(int args, char *argv[])
 	// printf("-------\n");
 
 	// leaks check
-	free_all_node(a);
-	free_all_node(b);
+	// free_all_node(a);
+	// free_all_node(b);
 	// system("leaks push_swap");
-}

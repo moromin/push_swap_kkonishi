@@ -122,62 +122,54 @@ static int	size_pivot(t_node *a, size_t size)
 
 void	b_to_a(t_node *a, t_node *b, size_t size)
 {
-	size_t	rb_count;
-	size_t	pa_count;
+	t_ps	count;
 	int		pivot;
 
-	rb_count = 0;
-	pa_count = 0;
-	if (size == 1)
-		return (push(b, a, 0));
-	if (size == 2 || sort_check_b(b, size))
+	init_count(&count, size);
+	if (size <= 2 || sort_check_b(b, size))
 		return (push_btoa(a, b, size));
 	pivot = size_pivot(b, size);
-	while (pa_count < (size - 1) / 2)
+	while (count.pa < (size - 1) / 2)
 	{
 		if (b->next->val > pivot)
 		{
 			push(b, a, 0);
-			pa_count++;
+			count.pa++;
 		}
 		else
 		{
 			rotate(b, 0, 0);
-			rb_count++;
+			count.rb++;
 		}
 	}
-	while (rb_count-- > 0 && node_size(a) > 1)
+	while (count.rb-- > 0 && node_size(a) > 1)
 		reverse_rotate(b, 0, 0);
-	a_to_b(a, b, pa_count);
-	b_to_a(a, b, size - pa_count);
+	a_to_b(a, b, count.pa);
+	b_to_a(a, b, size - count.pa);
 }
 
 void	a_to_b(t_node *a, t_node *b, size_t size)
 {
-	size_t	pb_count;
-	size_t	ra_count;
-	size_t	origin_size;
+	t_ps	count;
 	int		pivot;
 
-	pb_count = 0;
-	ra_count = 0;
-	origin_size = size;
+	init_count(&count, size);
 	if (size == 1 || sort_check_a(a, size))
 		return ;
 	pivot = size_pivot(a, size);
-	while (pb_count < origin_size / 2)
+	while (count.pb < count.origin / 2)
 	{
 		if (a->next->val < pivot)
 		{
 			push(a, b, 1);
-			pb_count++;
+			count.pb++;
 			size--;
 		}
 		else
-			ra_count += node_rotate(a, pivot, size);
+			count.ra += node_rotate(a, pivot, size);
 	}
-	while (ra_count-- > 0 && node_size(a) > 1)
+	while (count.ra-- > 0 && node_size(a) > 1)
 		reverse_rotate(a, 1, 0);
 	a_to_b(a, b, size);
-	b_to_a(a, b, pb_count);
+	b_to_a(a, b, count.pb);
 }
