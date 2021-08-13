@@ -14,7 +14,7 @@ static void	node_dup_check(t_node *a)
 		{
 			if (a->val == tmp->val)
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				free_all_node(head);
 				exit(EXIT_FAILURE);
 			}

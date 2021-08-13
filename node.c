@@ -7,7 +7,7 @@ t_node	*head_node(void)
 	head = (t_node *)malloc(sizeof(t_node));
 	if (!head)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	head->next = head;
@@ -22,7 +22,7 @@ static void	add_node(t_node *head, int val)
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		free_all_node(head);
 		exit(EXIT_FAILURE);
 	}

@@ -102,7 +102,7 @@ static int	size_pivot(t_node *a, size_t size)
 	tab = (int *)malloc(sizeof(int) * size);
 	if (!tab)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		exit(EXIT_FAILURE);
 	}
 	storage_value(a, tab, size);
