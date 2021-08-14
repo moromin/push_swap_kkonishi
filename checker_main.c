@@ -72,24 +72,24 @@ int	main(int args, char *argv[])
 	}
 	cmd_sort_check(a, b);
 	// confirm
-	t_node	*head_a = a;
-	t_node	*head_b = b;
-	int		i = 0;
+	// t_node	*head_a = a;
+	// t_node	*head_b = b;
+	// int		i = 0;
 	
-	a = a->next;
-	while (a != head_a)
-	{
-		printf("a[%d]:%d\n", i, a->val);
-		a = a->next;
-		i++;
-	}
-	i = 0;
-	b = b->next;
-	while (b != head_b)
-	{
-		printf("b[%d]:%d\n", i, b->val);
-		b = b->next;
-		i++;
-	}
+	// a = a->next;
+	// while (a != head_a)
+	// {
+	// 	printf("a[%d]:%d\n", i, a->val);
+	// 	a = a->next;
+	// 	i++;
+	// }
+	// i = 0;
+	// b = b->next;
+	// while (b != head_b)
+	// {
+	// 	printf("b[%d]:%d\n", i, b->val);
+	// 	b = b->next;
+	// 	i++;
+	// }
 	return (0);
 }
