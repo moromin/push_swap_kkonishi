@@ -42,8 +42,8 @@ void	cmd_sort_check(t_node *a, t_node *b)
 	if (i != sort || node_size(b))
 	{
 		write(1, "KO\n", 3);
-		// exit(EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	}
 	write(1, "OK\n", 3);
-	// exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

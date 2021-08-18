@@ -1,58 +1,5 @@
 #include "ps.h"
 
-// static size_t	search_min_index(t_node *a, size_t target, size_t size)
-// {
-// 	t_node	*head;
-// 	size_t	index_first;
-// 	size_t	index_second;
-
-// 	head = a;
-// 	a = a->next;
-// 	index_first = 0;
-// 	while (a != head && a->index > target)
-// 	{
-// 		index_first++;
-// 		a = a->next;
-// 	}
-// 	a = head->prev;
-// 	index_second = 0;
-// 	while (a != head && a->index > target)
-// 	{
-// 		index_second++;
-// 		a = a->prev;
-// 	}
-// 	if (index_second < index_first)
-// 		return (size - 1 - index_second);
-// 	return (index_first);
-// }
-
-// static void	half_set(t_node *a, t_node *b, size_t size)
-// {
-// 	size_t	origin_size;
-// 	size_t	index;
-
-// 	origin_size = size;
-// 	while (size > origin_size / 2)
-// 	{
-// 		index = search_min_index(a, (origin_size - 1) / 2, origin_size);
-// 		if (index != 0)
-// 		{
-// 			if (index <= (size - 1) / 2)
-// 			{
-// 				while (index-- > 0)
-// 					rotate(a, 1, 0);
-// 			}
-// 			else
-// 			{
-// 				while (index++ < size)
-// 					reverse_rotate(a, 1, 0);
-// 			}
-// 		}
-// 		push(a, b, 1);
-// 		size--;
-// 	}
-// }
-
 static size_t	ra_or_rra(t_node *a, size_t count, int rflag)
 {
 	size_t	res;

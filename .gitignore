@@ -57,3 +57,4 @@ samples/
 test*
 push_swap*
 *checker*
+cmd_tester

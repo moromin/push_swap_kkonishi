@@ -54,6 +54,8 @@ void	init_node(t_node *a, int args, char *argv[])
 				j++;
 			while (argv_check(argv[i][j]) && argv[i][j])
 				j++;
+			while (!argv_check(argv[i][j]) && argv[i][j])
+				j++;
 		}
 		i++;
 	}
