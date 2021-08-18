@@ -64,6 +64,29 @@ static int	size_pivot(t_node *a, size_t size)
 		i++;
 	}
 	free(tab);
+	
+	// size_t	sum;
+	// size_t	i;
+	// t_node	*head;
+
+	// i = 0;
+	// sum = 0;
+	// head = a;
+	// a = a->next;
+	// while (i < size)
+	// {
+	// 	sum += a->index;
+	// 	i++;
+	// 	a = a->next;
+	// }
+	// sum = sum / size;
+	// a = head->next;
+	// while (a != head)
+	// {
+	// 	if (a->index == sum)
+	// 		break ;
+	// 	a = a->next;
+	// }
 	return (a->val);
 }
 

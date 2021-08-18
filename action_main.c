@@ -94,3 +94,25 @@ void	push(t_node *n1, t_node *n2, int atob_flag)
 	else
 		write(1, "pa\n", 3);
 }
+
+void	both_action(t_node *a, t_node *b, int flag)
+{
+	if (flag == SS)
+	{
+		swap(a, 0, 1);
+		swap(b, 0, 1);
+		write(1, "ss\n", 3);
+	}
+	else if (flag == RR)
+	{
+		rotate(a, 0, 1);
+		rotate(b, 0, 1);
+		write(1, "rr\n", 3);
+	}
+	else if (flag == RRR)
+	{
+		reverse_rotate(a, 0, 1);
+		reverse_rotate(b, 0, 1);
+		write(1, "rrr\n", 4);
+	}
+}

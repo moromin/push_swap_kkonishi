@@ -8,6 +8,17 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
+# define RA 0
+# define RB 1
+# define RRA 2
+# define RRB 3
+# define SA 4
+# define SB 5
+# define PA 6
+# define PB 7
+# define SS 8
+# define RR 9
+# define RRR 10
 typedef struct s_node
 {
 	int				val;
@@ -59,6 +70,7 @@ void	swap(t_node *node, int ab_flag, int same_flag);
 void	rotate(t_node *node, int ab_flag, int same_flag);
 void	reverse_rotate(t_node *node, int ab_flag, int same_flag);
 void	push(t_node *n1, t_node *n2, int atob_flag);
+void	both_action(t_node *a, t_node *b, int flag);
 
 // action_sub.c
 void	ss(t_node *a, t_node *b);
@@ -84,15 +96,13 @@ void	a_to_b(t_node *a, t_node *b, size_t size);
 void	b_to_a(t_node *a, t_node *b, size_t size);
 
 // NEO ZONE
-// neo_halfset.c
-void	half_set(t_node *a, t_node *b, size_t size, size_t count);
+void	visualize_node(t_node *a, t_node *b);
 
 // neo_quick_sort_stack.c
-void	b_quicksort(t_node *a, t_node *b, size_t size);
-void	a_quicksort(t_node *a, t_node *b, size_t size);
+void	a_to_b_neo(t_node *a, t_node *b, size_t size);
+void	b_to_a_neo(t_node *a, t_node *b, size_t size);
 
 // neo_push_quick.c
-void	push_b_quick(t_node *a, t_node *b, size_t size);
-void	sorted_a_rotate(t_node *a, size_t size);
+void	size_two_atobtoa(t_node *a, t_node *b, size_t size, int flag);
 
 #endif

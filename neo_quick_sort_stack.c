@@ -1,6 +1,6 @@
 #include "ps.h"
 
-static int	size_pivot(t_node *a, size_t size)
+static void	size_pivot_double(t_node *a, size_t size, int *big, int *small)
 {
 	int		*tab;
 	size_t	i;
@@ -17,88 +17,98 @@ static int	size_pivot(t_node *a, size_t size)
 	a = a->next;
 	while (i < size)
 	{
-		if (a->val == tab[size / 2])
-			break ;
+		if (a->val == tab[size / 3])
+			*small = a->val;
+		else if (a->val == tab[size * 2 / 3])
+			*big = a->val;
 		a = a->next;
 		i++;
 	}
 	free(tab);
-	return (a->val);
 }
 
-static void	rb_or_rrb(t_node *b, int pivot, t_node *head)
+static size_t	action_add(t_node *a, t_node *b, int flag)
 {
-	size_t	index_first;
-	size_t	index_second;
+	if (flag == RA && node_size(a) > 1)
+		rotate(a, 1, 0);
+	else if (flag == RB && node_size(b) > 1)
+		rotate(b, 0, 0);
+	else if (flag == PB)
+		push(a, b, 1);
+	else if (flag == PA)
+		push(b, a, 0);
+	return (1);
+}
 
-	b = b->next;
-	index_first = 0;
-	while (b != head && b->val <= pivot)
+static void	rrr_count(t_node *a, t_node *b, size_t ra_count, size_t rb_count)
+{
+	if (node_size(a) > 1 && node_size(b) > 1)
 	{
-		index_first++;
-		b = b->next;
+		while (ra_count != 0 && rb_count != 0)
+		{
+			both_action(a, b, RRR);
+			ra_count--;
+			rb_count--;
+		}
 	}
-	b = head->prev;
-	index_second = 1;
-	while (b != head && b->val <= pivot)
-	{
-		index_second++;
-		b = b->prev;
-	}
-	b = head;
-	if (index_second < index_first)
-		while (index_second-- > 0)
+	if (node_size(a) > 1)
+		while (ra_count-- > 0)
+			reverse_rotate(a, 1, 0);
+	if (node_size(b) > 1)
+		while (rb_count-- > 0)
 			reverse_rotate(b, 0, 0);
-	else
-		while (index_first-- > 0)
-			rotate(b, 0, 0);
 }
 
-void	a_quicksort(t_node *a, t_node *b, size_t size)
+void	b_to_a_neo(t_node *a, t_node *b, size_t size)
 {
+	int		pivot_big;
+	int		pivot_small;
 	t_ps	count;
-	int		pivot;
 
+	if (size <= 2)
+		return (size_two_atobtoa(a, b, size, 0));
 	init_count(&count, size);
-	if (size <= 2 || sort_check_a(a, size))
-		return (sorted_a_rotate(a, size));
-	pivot = size_pivot(a, size);
+	size_pivot_double(b, size, &pivot_big, &pivot_small);
 	while (size-- > 0)
 	{
-		push(a, b, 1);
-		count.pb++;
-		// if (sort_check_a(a, size))
-		// {
-		// 	break ;
-		// }
-		// if (size == 2)
-		// {
-		// 	sorted_a_rotate(a, size);
-		// 	break ;
-		// }
+		if (b->next->val < pivot_small)
+			count.rb += action_add(a, b, RB);
+		else
+		{
+			count.pa += action_add(a, b, PA);
+			if (a->next->val < pivot_big)
+				count.ra += action_add(a, b, RA);
+		}
 	}
-	b_quicksort(a, b, count.pb);
+	a_to_b_neo(a, b, count.pa - count.ra);
+	rrr_count(a, b, count.ra, count.rb);
+	a_to_b_neo(a, b, count.ra);
+	b_to_a_neo(a, b, count.rb);
 }
 
-void	b_quicksort(t_node *a, t_node *b, size_t size)
+void	a_to_b_neo(t_node *a, t_node *b, size_t size)
 {
+	int		pivot_big;
+	int		pivot_small;
 	t_ps	count;
-	int		pivot;
 
+	if (size <= 2 || sort_check_a(a, size))
+		return (size_two_atobtoa(a, b, size, 1));
 	init_count(&count, size);
-	if (size <= 3 || sort_check_b(b, size))
-		return (push_b_quick(a, b, size));
-	pivot = size_pivot(b, size);
-	while (count.pa < (size - 1) / 2)
+	size_pivot_double(a, size, &pivot_big, &pivot_small);
+	while (size-- > 0)
 	{
-		if (b->next->val > pivot)
-		{
-			push(b, a, 0);
-			count.pa++;
-		}
+		if (a->next->val >= pivot_big)
+			count.ra += action_add(a, b, RA);
 		else
-			rb_or_rrb(b, pivot, b);
+		{
+			count.pb += action_add(a, b, PB);
+			if (b->next->val >= pivot_small)
+				count.rb += action_add(a, b, RB);
+		}
 	}
-	b_quicksort(a, b, size - count.pa);
-	a_quicksort(a, b, count.pa);
+	rrr_count(a, b, count.ra, count.rb);
+	a_to_b_neo(a, b, count.ra);
+	b_to_a_neo(a, b, count.rb);
+	b_to_a_neo(a, b, count.pb - count.rb);
 }
