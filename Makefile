@@ -17,7 +17,7 @@ NEO_SRCS	=	ps_main.c node.c node_checker.c arg_checker.c \
 				compression_1.c compression_2.c \
 				neo_quick_sort_stack.c \
 				action_main.c \
-				neo_push_quick.c 
+				neo_sort_utils.c 
 OBJS		= $(SRCS:%.c=%.o)
 BONUS_OBJS	= $(BONUS_SRCS:%.c=%.o)
 NEO_OBJS	= $(NEO_SRCS:%.c=%.o)

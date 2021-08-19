@@ -102,7 +102,8 @@ void	visualize_node(t_node *a, t_node *b);
 void	a_to_b_neo(t_node *a, t_node *b, size_t size);
 void	b_to_a_neo(t_node *a, t_node *b, size_t size);
 
-// neo_push_quick.c
+// neo_sort_utils.c
 void	size_two_atobtoa(t_node *a, t_node *b, size_t size, int flag);
+int		above_two_check_a(t_node *a, size_t size, t_node *head);
 
 #endif

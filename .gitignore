@@ -53,8 +53,9 @@ dkms.conf
 
 # This project original
 .vscode/
+.DS_STORE
 samples/
 test*
 push_swap*
 *checker*
-cmd_tester
+cmd_tester*

@@ -92,6 +92,8 @@ void	a_to_b_neo(t_node *a, t_node *b, size_t size)
 	int		pivot_small;
 	t_ps	count;
 
+	if (above_two_check_a(a, size, a))
+		return (swap(a, 1, 0));
 	if (size <= 2 || sort_check_a(a, size))
 		return (size_two_atobtoa(a, b, size, 1));
 	init_count(&count, size);
