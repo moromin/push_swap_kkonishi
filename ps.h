@@ -62,20 +62,12 @@ size_t	min_search(t_node *a);
 size_t	max_search(t_node *a);
 void	size_until_six(t_node *a, t_node *b, size_t size);
 
-// branch_over_six.c
-void	size_over_six(t_node *a, t_node *b, size_t size);
-
 // action_main.c
 void	swap(t_node *node, int ab_flag, int same_flag);
 void	rotate(t_node *node, int ab_flag, int same_flag);
 void	reverse_rotate(t_node *node, int ab_flag, int same_flag);
 void	push(t_node *n1, t_node *n2, int atob_flag);
 void	both_action(t_node *a, t_node *b, int flag);
-
-// action_sub.c
-void	ss(t_node *a, t_node *b);
-void	rr(t_node *a, t_node *b);
-void	rrr(t_node *a, t_node *b);
 
 // compression_1.c
 void	compression_main(t_node *a, size_t size);
@@ -86,23 +78,19 @@ void	storage_value(t_node *a, int *tab, size_t size);
 void	binary_search(t_node *a, size_t size, int *tab);
 void	init_count(t_ps *count, size_t size);
 
-// quick_sort_stack.c
-void	sort_stack(t_node *a, t_node *b, size_t size);
+// NEO ZONE
+// branch_over_six.c
+void	size_over_six(t_node *a, t_node *b, size_t size);
 int		sort_check_a(t_node *a, size_t size);
 int		sort_check_b(t_node *b, size_t size);
 size_t	node_size(t_node *a);
-void	push_btoa(t_node *a, t_node *b, size_t size);
-void	a_to_b(t_node *a, t_node *b, size_t size);
-void	b_to_a(t_node *a, t_node *b, size_t size);
-
-// NEO ZONE
 void	visualize_node(t_node *a, t_node *b);
 
-// neo_quick_sort_stack.c
+// quick_sort_stack.c
 void	a_to_b_neo(t_node *a, t_node *b, size_t size);
 void	b_to_a_neo(t_node *a, t_node *b, size_t size);
 
-// neo_sort_utils.c
+// sort_utils.c
 void	size_two_atobtoa(t_node *a, t_node *b, size_t size, int flag);
 int		above_two_check_a(t_node *a, size_t size, t_node *head);
 

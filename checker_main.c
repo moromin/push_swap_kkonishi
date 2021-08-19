@@ -70,7 +70,7 @@ int	main(int args, char *argv[])
 		free(cmd);
 		cmd = get_next_line(0);
 	}
-	// cmd_sort_check(a, b);
+	cmd_sort_check(a, b);
 	// confirm
 	t_node	*head_a = a;
 	t_node	*head_b = b;

@@ -5,12 +5,13 @@ SRCS		= 	ps_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c branch_over_six.c \
 				compression_1.c compression_2.c \
 				quick_sort_stack.c \
-				action_main.c
+				action_main.c \
+				sort_utils.c 
 BONUS_SRCS	= 	checker_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c branch_over_six.c \
 				compression_1.c compression_2.c \
 				quick_sort_stack.c \
-				action_main.c \
+				action_main.c sort_utils.c \
 				checker_command.c checker_action.c
 NEO_SRCS	=	ps_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c neo_branch_over_six.c \
