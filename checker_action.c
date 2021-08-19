@@ -69,3 +69,22 @@ void	push_c(t_node *n1, t_node *n2)
 	head_n2->next = node1;
 	node2->prev = node1;
 }
+
+void	both_action_c(t_node *a, t_node *b, int flag)
+{
+	if (flag == SS)
+	{
+		swap_c(a);
+		swap_c(b);
+	}
+	else if (flag == RR)
+	{
+		rotate_c(a);
+		rotate_c(b);
+	}
+	else if (flag == RRR)
+	{
+		reverse_rotate_c(a);
+		reverse_rotate_c(b);
+	}
+}

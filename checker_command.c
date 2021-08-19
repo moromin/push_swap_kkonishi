@@ -18,6 +18,12 @@ void	cmd_stack(t_node *a, t_node *b, char *cmd)
 		push_c(b, a);
 	else if (!ft_strncmp(cmd, "pb\n", 3))
 		push_c(a, b);
+	else if (!ft_strncmp(cmd, "ss\n", 3))
+		both_action_c(a, b, SS);
+	else if (!ft_strncmp(cmd, "rr\n", 3))
+		both_action_c(a, b, RR);
+	else if (!ft_strncmp(cmd, "rrr\n", 4))
+		both_action_c(a, b, RRR);
 }
 
 void	cmd_sort_check(t_node *a, t_node *b)

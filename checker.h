@@ -13,5 +13,6 @@ void	swap_c(t_node *node);
 void	rotate_c(t_node *node);
 void	reverse_rotate_c(t_node *node);
 void	push_c(t_node *n1, t_node *n2);
+void	both_action_c(t_node *a, t_node *b, int flag);
 
 #endif
