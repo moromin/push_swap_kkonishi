@@ -1,16 +1,13 @@
 #include "ps.h"
 
-static void	size_pivot_double(t_node *a, size_t size, int *big, int *small)
+static int	size_pivot_double(t_node *a, size_t size, t_ps *count)
 {
 	int		*tab;
 	size_t	i;
 
 	tab = (int *)malloc(sizeof(int) * size);
 	if (!tab)
-	{
-		write(2, "Error\n", 6);
-		exit(EXIT_FAILURE);
-	}
+		return (-1);
 	storage_value(a, tab, size);
 	quick_sort_array(tab, 0, size - 1);
 	i = 0;
@@ -18,13 +15,14 @@ static void	size_pivot_double(t_node *a, size_t size, int *big, int *small)
 	while (i < size)
 	{
 		if (a->val == tab[size / 3])
-			*small = a->val;
+			count->pivot_small = a->val;
 		else if (a->val == tab[size * 2 / 3])
-			*big = a->val;
+			count->pivot_big = a->val;
 		a = a->next;
 		i++;
 	}
 	free(tab);
+	return (0);
 }
 
 static size_t	action_add(t_node *a, t_node *b, int flag)
@@ -59,37 +57,34 @@ static void	rrr_count(t_node *a, t_node *b, size_t ra_count, size_t rb_count)
 			reverse_rotate(b, 0, 0);
 }
 
-void	b_to_a_neo(t_node *a, t_node *b, size_t size)
+void	b_to_a(t_node *a, t_node *b, size_t size)
 {
-	int		pivot_big;
-	int		pivot_small;
 	t_ps	count;
 
 	if (size <= 2)
 		return (size_two_atobtoa(a, b, size, 0));
 	init_count(&count, size);
-	size_pivot_double(b, size, &pivot_big, &pivot_small);
+	if (size_pivot_double(b, size, &count) < 0)
+		return (double_node_free(a, b));
 	while (size-- > 0)
 	{
-		if (b->next->val < pivot_small)
+		if (b->next->val < count.pivot_small)
 			count.rb += action_add(a, b, RB);
 		else
 		{
 			count.pa += action_add(a, b, PA);
-			if (a->next->val < pivot_big)
+			if (a->next->val < count.pivot_big)
 				count.ra += action_add(a, b, RA);
 		}
 	}
-	a_to_b_neo(a, b, count.pa - count.ra);
+	a_to_b(a, b, count.pa - count.ra);
 	rrr_count(a, b, count.ra, count.rb);
-	a_to_b_neo(a, b, count.ra);
-	b_to_a_neo(a, b, count.rb);
+	a_to_b(a, b, count.ra);
+	b_to_a(a, b, count.rb);
 }
 
-void	a_to_b_neo(t_node *a, t_node *b, size_t size)
+void	a_to_b(t_node *a, t_node *b, size_t size)
 {
-	int		pivot_big;
-	int		pivot_small;
 	t_ps	count;
 
 	if (above_two_check_a(a, size, a))
@@ -97,20 +92,21 @@ void	a_to_b_neo(t_node *a, t_node *b, size_t size)
 	if (size <= 2 || sort_check_a(a, size))
 		return (size_two_atobtoa(a, b, size, 1));
 	init_count(&count, size);
-	size_pivot_double(a, size, &pivot_big, &pivot_small);
+	if (size_pivot_double(a, size, &count) < 0)
+		return (double_node_free(a, b));
 	while (size-- > 0)
 	{
-		if (a->next->val >= pivot_big)
+		if (a->next->val >= count.pivot_big)
 			count.ra += action_add(a, b, RA);
 		else
 		{
 			count.pb += action_add(a, b, PB);
-			if (b->next->val >= pivot_small)
+			if (b->next->val >= count.pivot_small)
 				count.rb += action_add(a, b, RB);
 		}
 	}
 	rrr_count(a, b, count.ra, count.rb);
-	a_to_b_neo(a, b, count.ra);
-	b_to_a_neo(a, b, count.rb);
-	b_to_a_neo(a, b, count.pb - count.rb);
+	a_to_b(a, b, count.ra);
+	b_to_a(a, b, count.rb);
+	b_to_a(a, b, count.pb - count.rb);
 }

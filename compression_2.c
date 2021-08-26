@@ -7,6 +7,8 @@ void	init_count(t_ps *count, size_t size)
 	count->pb = 0;
 	count->ra = 0;
 	count->rb = 0;
+	count->pivot_big = 0;
+	count->pivot_small = 0;
 }
 
 static size_t	search_main(int *tab, int target, size_t size)

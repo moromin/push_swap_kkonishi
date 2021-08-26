@@ -14,11 +14,11 @@ BONUS_SRCS	= 	checker_main.c node.c node_checker.c arg_checker.c \
 				action_main.c sort_utils.c \
 				checker_command.c checker_action.c
 NEO_SRCS	=	ps_main.c node.c node_checker.c arg_checker.c \
-				branch_until_six.c branch_until_three.c neo_branch_over_six.c \
+				branch_until_six.c branch_until_three.c \
 				compression_1.c compression_2.c \
-				neo_quick_sort_stack.c \
 				action_main.c \
-				neo_sort_utils.c 
+				neo_branch_over_six.c neo_quick_sort_stack.c \
+				neo_action.c neo_cmd_list.c neo_sort_utils.c neo_cmd_edit.c
 OBJS		= $(SRCS:%.c=%.o)
 BONUS_OBJS	= $(BONUS_SRCS:%.c=%.o)
 NEO_OBJS	= $(NEO_SRCS:%.c=%.o)

@@ -34,7 +34,16 @@ typedef struct s_ps
 	size_t	rb;
 	size_t	pa;
 	size_t	origin;
+	int		pivot_big;
+	int		pivot_small;
 }	t_ps;
+
+typedef struct s_cmd
+{
+	int				val;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}	t_cmd;
 
 // main.c
 void	argument_check(int args, char *argv[]);
@@ -78,20 +87,44 @@ void	storage_value(t_node *a, int *tab, size_t size);
 void	binary_search(t_node *a, size_t size, int *tab);
 void	init_count(t_ps *count, size_t size);
 
-// NEO ZONE
 // branch_over_six.c
 void	size_over_six(t_node *a, t_node *b, size_t size);
 int		sort_check_a(t_node *a, size_t size);
 int		sort_check_b(t_node *b, size_t size);
 size_t	node_size(t_node *a);
-void	visualize_node(t_node *a, t_node *b);
+void	double_node_free(t_node *a, t_node *b);
 
 // quick_sort_stack.c
-void	a_to_b_neo(t_node *a, t_node *b, size_t size);
-void	b_to_a_neo(t_node *a, t_node *b, size_t size);
+void	a_to_b(t_node *a, t_node *b, size_t size);
+void	b_to_a(t_node *a, t_node *b, size_t size);
 
 // sort_utils.c
 void	size_two_atobtoa(t_node *a, t_node *b, size_t size, int flag);
 int		above_two_check_a(t_node *a, size_t size, t_node *head);
+
+// NEO ZONE
+// neo_branch_over_six.c
+
+// neo_quick_sort_stack.c
+void	a_to_b_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
+void	b_to_a_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
+
+// neo_sort_utils.c
+void	size_two_btoa_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
+void	size_two_atob_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
+
+// neo_action.c
+void	swap_neo(t_node *node, t_node *sub, int cmd, t_cmd **lst);
+void	rotate_neo(t_node *node, t_node *sub, int cmd, t_cmd **lst);
+void	reverse_rotate_neo(t_node *node, t_node *sub, int cmd, t_cmd **lst);
+void	push_neo(t_node *n1, t_node *n2, int cmd, t_cmd **lst);
+void	both_action_neo(t_node *a, t_node *b, int cmd, t_cmd **lst);
+
+// neo_cmd_list.c
+int		lstadd_back(t_cmd **lst, int cmd);
+void	lstclear(t_cmd **lst);
+
+// neo_cmd_edit.c
+void	edit_cmd(t_cmd *lst);
 
 #endif
