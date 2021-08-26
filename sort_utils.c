@@ -41,3 +41,21 @@ int	above_two_check_a(t_node *a, size_t size, t_node *head)
 	}
 	return (1);
 }
+
+size_t	min_index_search(t_node *a, size_t size)
+{
+	size_t	min;
+	size_t	i;
+
+	i = 0;
+	min = a->next->index;
+	a = a->next;
+	while (i < size)
+	{
+		if (a->index < min)
+			min = a->index;
+		i++;
+		a = a->next;
+	}
+	return (min);
+}

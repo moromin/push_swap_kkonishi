@@ -112,6 +112,7 @@ void	b_to_a_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
 // neo_sort_utils.c
 void	size_two_btoa_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
 void	size_two_atob_neo(t_node *a, t_node *b, size_t size, t_cmd **lst);
+size_t	min_index_search(t_node *a, size_t size);
 
 // neo_action.c
 void	swap_neo(t_node *node, t_node *sub, int cmd, t_cmd **lst);

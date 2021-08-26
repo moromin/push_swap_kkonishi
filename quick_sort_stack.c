@@ -1,27 +1,47 @@
 #include "ps.h"
 
+// static int	size_pivot_double(t_node *a, size_t size, t_ps *count)
+// {
+// 	int		*tab;
+// 	size_t	i;
+
+// 	tab = (int *)malloc(sizeof(int) * size);
+// 	if (!tab)
+// 		return (-1);
+// 	storage_value(a, tab, size);
+// 	quick_sort_array(tab, 0, size - 1);
+// 	i = 0;
+// 	a = a->next;
+// 	while (i < size)
+// 	{
+// 		if (a->val == tab[size / 3])
+// 			count->pivot_small = a->val;
+// 		else if (a->val == tab[size * 2 / 3])
+// 			count->pivot_big = a->val;
+// 		a = a->next;
+// 		i++;
+// 	}
+// 	free(tab);
+// 	return (0);
+// }
+
 static int	size_pivot_double(t_node *a, size_t size, t_ps *count)
 {
-	int		*tab;
+	size_t	min_index;
 	size_t	i;
 
-	tab = (int *)malloc(sizeof(int) * size);
-	if (!tab)
-		return (-1);
-	storage_value(a, tab, size);
-	quick_sort_array(tab, 0, size - 1);
+	min_index = min_index_search(a, size);
 	i = 0;
 	a = a->next;
 	while (i < size)
 	{
-		if (a->val == tab[size / 3])
+		if (a->index == min_index + (size / 3))
 			count->pivot_small = a->val;
-		else if (a->val == tab[size * 2 / 3])
+		else if (a->index == min_index + (size * 2 / 3))
 			count->pivot_big = a->val;
 		a = a->next;
 		i++;
 	}
-	free(tab);
 	return (0);
 }
 
