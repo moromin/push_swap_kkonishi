@@ -26,6 +26,8 @@ void	rotate_c(t_node *node)
 	head = node;
 	node1 = head->next;
 	node2 = head->prev;
+	if (node1->next == head)
+		return ;
 	head->next = node1->next;
 	node1->next->prev = head;
 	node1->next = head;
@@ -43,6 +45,8 @@ void	reverse_rotate_c(t_node *node)
 	head = node;
 	node1 = head->next;
 	node2 = head->prev;
+	if (node1->next == head)
+		return ;
 	head->prev = node2->prev;
 	node2->prev->next = head;
 	node2->next = node1;

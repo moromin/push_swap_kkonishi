@@ -58,41 +58,10 @@ int	main(int args, char *argv[])
 	a = head_node();
 	argument_check(args, argv);
 	init_node(a, args, argv);
-	size = node_check(a);
+	size = node_check(a, 0);
 	b = head_node();
 	branch_node_size(a, b, size);
 	free_all_node(a);
 	free_all_node(b);
 	return (0);
 }
-	// To confirm node
-	// t_node	*head_a;
-	// t_node	*head_b;
-	// int		i;
-
-	// head_a = a;
-	// head_b = b;
-	// i = 0;
-	// a = a->next;
-	// printf("-------\n");
-	// while (a != head_a)
-	// {
-	// 	i++;
-	// 	printf("a%d:%d\n", i, a->val);
-	// 	a = a->next;
-	// }
-	// i = 0;
-	// b = b->next;
-	// printf("-------\n");
-	// while (b != head_b)
-	// {
-	// 	i++;
-	// 	printf("b%d:%d\n", i, b->val);
-	// 	b = b->next;
-	// }
-	// printf("-------\n");
-
-	// leaks check
-	// free_all_node(a);
-	// free_all_node(b);
-	// system("leaks push_swap");

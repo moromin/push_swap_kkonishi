@@ -40,7 +40,7 @@ static size_t	node_size_check(t_node *a)
 	return (size);
 }
 
-static void	node_sorted_check(t_node *a, size_t size)
+static void	node_sorted_check(t_node *a, size_t size, int b_flag)
 {
 	size_t	i;
 	t_node	*head;
@@ -58,17 +58,19 @@ static void	node_sorted_check(t_node *a, size_t size)
 	if (i + 1 == size)
 	{
 		free_all_node(head);
+		if (b_flag)
+			write(1, "OK\n", 3);
 		exit(EXIT_SUCCESS);
 	}
 }
 
-size_t	node_check(t_node *a)
+size_t	node_check(t_node *a, int b_flag)
 {
 	size_t	size;
 
 	size = 0;
 	node_dup_check(a);
 	size = node_size_check(a);
-	node_sorted_check(a, size);
+	node_sorted_check(a, size, b_flag);
 	return (size);
 }

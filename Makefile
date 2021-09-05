@@ -1,6 +1,6 @@
 NAME		= push_swap
 # Change checker name!!!
-BONUS_NAME	= my_checker
+BONUS_NAME	= checker
 SRCS		= 	ps_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c branch_over_six.c \
 				compression_1.c compression_2.c \

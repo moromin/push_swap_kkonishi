@@ -59,7 +59,7 @@ void	init_node(t_node *a, int args, char *argv[]);
 void	free_all_node(t_node *node);
 
 // node_checker.c
-size_t	node_check(t_node *a);
+size_t	node_check(t_node *a, int b_flag);
 
 // branch.c
 void	size_two(t_node *a);
