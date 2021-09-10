@@ -1,6 +1,6 @@
 NAME		= push_swap
 BONUS_NAME	= checker
-PRE_SRC			= 	ps_main.c node.c node_checker.c arg_checker.c \
+SRC			= 	ps_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c branch_over_six.c \
 				compression_1.c compression_2.c \
 				quick_sort_stack.c \
@@ -12,7 +12,7 @@ BONUS_SRC	= 	checker_main.c node.c node_checker.c arg_checker.c \
 				quick_sort_stack.c \
 				action_main.c sort_utils.c \
 				checker_command.c checker_action.c
-SRC			=	ps_main.c node.c node_checker.c arg_checker.c \
+PRE_SRC			=	ps_main.c node.c node_checker.c arg_checker.c \
 				branch_until_six.c branch_until_three.c \
 				compression_1.c compression_2.c \
 				action_main.c \
@@ -46,6 +46,7 @@ bonus: $(BONUS_OBJS) $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)
+	make clean -C $(GNL_PATH)
 	rm -f $(OBJS) $(BONUS_OBJS) $(NEO_OBJS)
 
 fclean: clean
@@ -53,6 +54,9 @@ fclean: clean
 	make fclean -C $(GNL_PATH)
 	rm -f $(NAME)
 	rm -f $(BONUS_NAME)
+
+norm:
+	norminette srcs
 
 # TODO
 pre: $(NEO_OBJS)

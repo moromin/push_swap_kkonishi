@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   compression_2.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/11 00:46:40 by kkonishi          #+#    #+#             */
+/*   Updated: 2021/09/11 00:46:41 by kkonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 void	init_count(t_ps *count, size_t size)
@@ -9,6 +21,9 @@ void	init_count(t_ps *count, size_t size)
 	count->rb = 0;
 	count->pivot_big = 0;
 	count->pivot_small = 0;
+	count->ra_flag = 0;
+	count->rb_flag = 0;
+	count->atob_flag = 0;
 }
 
 static size_t	search_main(int *tab, int target, size_t size)
@@ -42,5 +57,24 @@ void	binary_search(t_node *a, size_t size, int *tab)
 	{
 		a->index = search_main(tab, a->val, size);
 		a = a->next;
+	}
+}
+
+void	size_pivot_double(t_node *a, size_t size, t_ps *count)
+{
+	size_t	min_index;
+	size_t	i;
+
+	min_index = min_index_search(a, size);
+	i = 0;
+	a = a->next;
+	while (i < size)
+	{
+		if (a->index == min_index + (size / 3))
+			count->pivot_small = a->val;
+		else if (a->index == min_index + (size * 2 / 3))
+			count->pivot_big = a->val;
+		a = a->next;
+		i++;
 	}
 }

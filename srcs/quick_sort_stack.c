@@ -1,73 +1,86 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quick_sort_stack.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/11 00:47:07 by kkonishi          #+#    #+#             */
+/*   Updated: 2021/09/11 00:47:08 by kkonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
-// static int	size_pivot_double(t_node *a, size_t size, t_ps *count)
-// {
-// 	int		*tab;
-// 	size_t	i;
-
-// 	tab = (int *)malloc(sizeof(int) * size);
-// 	if (!tab)
-// 		return (-1);
-// 	storage_value(a, tab, size);
-// 	quick_sort_array(tab, 0, size - 1);
-// 	i = 0;
-// 	a = a->next;
-// 	while (i < size)
-// 	{
-// 		if (a->val == tab[size / 3])
-// 			count->pivot_small = a->val;
-// 		else if (a->val == tab[size * 2 / 3])
-// 			count->pivot_big = a->val;
-// 		a = a->next;
-// 		i++;
-// 	}
-// 	free(tab);
-// 	return (0);
-// }
-
-static int	size_pivot_double(t_node *a, size_t size, t_ps *count)
+static size_t	action_add_atob(t_node *a, t_node *b, int flag, t_ps *count)
 {
-	size_t	min_index;
-	size_t	i;
-
-	min_index = min_index_search(a, size);
-	i = 0;
-	a = a->next;
-	while (i < size)
+	if (flag == RA)
 	{
-		if (a->index == min_index + (size / 3))
-			count->pivot_small = a->val;
-		else if (a->index == min_index + (size * 2 / 3))
-			count->pivot_big = a->val;
-		a = a->next;
-		i++;
+		if (count->rb_flag)
+		{
+			both_action(a, b, RR);
+			count->rb_flag = 0;
+		}
+		else
+		{
+			rotate(a, 1, 0);
+			count->ra_flag = 1;
+		}
 	}
-	return (0);
-}
-
-static size_t	action_add(t_node *a, t_node *b, int flag)
-{
-	if (flag == RA && node_size(a) > 1)
-		rotate(a, 1, 0);
-	else if (flag == RB && node_size(b) > 1)
-		rotate(b, 0, 0);
+	else if (flag == RB)
+		count->rb_flag = 1;
 	else if (flag == PB)
+	{
+		if (count->rb_flag)
+			rotate(b, 0, 0);
 		push(a, b, 1);
-	else if (flag == PA)
-		push(b, a, 0);
+		count->rb_flag = 0;
+	}
 	return (1);
 }
 
-static void	rrr_count(t_node *a, t_node *b, size_t ra_count, size_t rb_count)
+static size_t	action_add_btoa(t_node *a, t_node *b, int flag, t_ps *count)
 {
-	if (node_size(a) > 1 && node_size(b) > 1)
+	if (flag == RA && node_size(a) > 1)
+		count->ra_flag = 1;
+	else if (flag == RB && node_size(b) > 1)
 	{
-		while (ra_count != 0 && rb_count != 0)
+		if (count->ra_flag)
 		{
-			both_action(a, b, RRR);
-			ra_count--;
-			rb_count--;
+			both_action(a, b, RR);
+			count->ra_flag = 0;
 		}
+		else
+		{
+			rotate(b, 0, 0);
+			count->rb_flag = 1;
+		}
+	}
+	else if (flag == PA)
+	{
+		if (count->ra_flag)
+			rotate(a, 1, 0);
+		push(b, a, 0);
+		count->ra_flag = 0;
+		count->rb_flag = 0;
+	}
+	return (1);
+}
+
+static void	rrr_count(t_node *a, t_node *b, t_ps *count)
+{
+	size_t	ra_count;
+	size_t	rb_count;
+
+	ra_count = count->ra;
+	rb_count = count->rb;
+	if (count->rb_flag && count->atob_flag)
+		rotate(b, 0, 0);
+	while (ra_count != 0 && rb_count != 0)
+	{
+		both_action(a, b, RRR);
+		ra_count--;
+		rb_count--;
 	}
 	if (node_size(a) > 1)
 		while (ra_count-- > 0)
@@ -84,21 +97,22 @@ void	b_to_a(t_node *a, t_node *b, size_t size)
 	if (size <= 2)
 		return (size_two_atobtoa(a, b, size, 0));
 	init_count(&count, size);
-	if (size_pivot_double(b, size, &count) < 0)
-		return (double_node_free(a, b));
+	size_pivot_double(b, size, &count);
 	while (size-- > 0)
 	{
 		if (b->next->val < count.pivot_small)
-			count.rb += action_add(a, b, RB);
+			count.rb += action_add_btoa(a, b, RB, &count);
 		else
 		{
-			count.pa += action_add(a, b, PA);
+			count.pa += action_add_btoa(a, b, PA, &count);
 			if (a->next->val < count.pivot_big)
-				count.ra += action_add(a, b, RA);
+				count.ra += action_add_btoa(a, b, RA, &count);
 		}
 	}
+	if (count.ra_flag)
+		rotate(a, 1, 0);
 	a_to_b(a, b, count.pa - count.ra);
-	rrr_count(a, b, count.ra, count.rb);
+	rrr_count(a, b, &count);
 	a_to_b(a, b, count.ra);
 	b_to_a(a, b, count.rb);
 }
@@ -112,20 +126,20 @@ void	a_to_b(t_node *a, t_node *b, size_t size)
 	if (size <= 2 || sort_check_a(a, size))
 		return (size_two_atobtoa(a, b, size, 1));
 	init_count(&count, size);
-	if (size_pivot_double(a, size, &count) < 0)
-		return (double_node_free(a, b));
+	size_pivot_double(a, size, &count);
 	while (size-- > 0)
 	{
 		if (a->next->val >= count.pivot_big)
-			count.ra += action_add(a, b, RA);
+			count.ra += action_add_atob(a, b, RA, &count);
 		else
 		{
-			count.pb += action_add(a, b, PB);
+			count.pb += action_add_atob(a, b, PB, &count);
 			if (b->next->val >= count.pivot_small)
-				count.rb += action_add(a, b, RB);
+				count.rb += action_add_atob(a, b, RB, &count);
 		}
 	}
-	rrr_count(a, b, count.ra, count.rb);
+	count.atob_flag = 1;
+	rrr_count(a, b, &count);
 	a_to_b(a, b, count.ra);
 	b_to_a(a, b, count.rb);
 	b_to_a(a, b, count.pb - count.rb);

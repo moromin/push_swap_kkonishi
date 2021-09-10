@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/11 00:47:05 by kkonishi          #+#    #+#             */
+/*   Updated: 2021/09/11 00:47:05 by kkonishi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PS_H
 # define PS_H
 
@@ -19,6 +31,7 @@
 # define SS 8
 # define RR 9
 # define RRR 10
+
 typedef struct s_node
 {
 	int				val;
@@ -29,10 +42,13 @@ typedef struct s_node
 
 typedef struct s_ps
 {
-	size_t	pb;
 	size_t	ra;
 	size_t	rb;
 	size_t	pa;
+	size_t	pb;
+	int		ra_flag;
+	int		rb_flag;
+	int		atob_flag;
 	size_t	origin;
 	int		pivot_big;
 	int		pivot_small;
@@ -86,6 +102,7 @@ void	storage_value(t_node *a, int *tab, size_t size);
 // compression_2.c
 void	binary_search(t_node *a, size_t size, int *tab);
 void	init_count(t_ps *count, size_t size);
+void	size_pivot_double(t_node *a, size_t size, t_ps *count);
 
 // branch_over_six.c
 void	size_over_six(t_node *a, t_node *b, size_t size);
@@ -127,5 +144,8 @@ void	lstclear(t_cmd **lst);
 
 // neo_cmd_edit.c
 void	edit_cmd(t_cmd *lst);
+
+// visualize.c
+void	visualize_node(t_node *a, t_node *b);
 
 #endif
