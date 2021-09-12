@@ -12,20 +12,20 @@ BONUS_SRC	= 	checker_main.c node.c node_checker.c arg_checker.c \
 				quick_sort_stack.c \
 				action_main.c sort_utils.c \
 				checker_command.c checker_action.c
-PRE_SRC			=	ps_main.c node.c node_checker.c arg_checker.c \
-				branch_until_six.c branch_until_three.c \
-				compression_1.c compression_2.c \
-				action_main.c \
-				neo_branch_over_six.c neo_quick_sort_stack.c \
-				neo_action.c neo_cmd_list.c neo_sort_utils.c neo_cmd_edit.c
+# NEO_SRC			=	ps_main.c node.c node_checker.c arg_checker.c \
+# 				branch_until_six.c branch_until_three.c \
+# 				compression_1.c compression_2.c \
+# 				action_main.c \
+# 				neo_branch_over_six.c neo_quick_sort_stack.c \
+# 				neo_action.c neo_cmd_list.c neo_sort_utils.c neo_cmd_edit.c
 SRCDIR		= srcs
 OBJDIR		= obj
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 BONUS_SRCS	= $(addprefix $(SRCDIR)/, $(BONUS_SRC))
-PRE_SRCS	= $(addprefix $(SRCDIR)/, $(PRE_SRC))
+# NEO_SRCS	= $(addprefix $(SRCDIR)/, $(NEO_SRC))
 OBJS		= $(SRCS:%.c=%.o)
 BONUS_OBJS	= $(BONUS_SRCS:%.c=%.o)
-NEO_OBJS	= $(PRE_SRCS:%.c=%.o)
+# NEO_OBJS	= $(NEO_SRCS:%.c=%.o)
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 LIBFT_PATH	= ./libft/
@@ -59,9 +59,9 @@ norm:
 	norminette srcs
 
 # TODO
-pre: $(NEO_OBJS)
-	make -C $(LIBFT_PATH)
-	$(CC) $(CFLAGS) $(NEO_OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
+# pre: $(NEO_OBJS)
+# 	make -C $(LIBFT_PATH)
+# 	$(CC) $(CFLAGS) $(NEO_OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
 
 re: fclean all
 
