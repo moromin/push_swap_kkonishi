@@ -57,6 +57,8 @@ fclean: clean
 
 norm:
 	norminette srcs
+	norminette gnl
+	norminette libft
 
 # TODO
 # pre: $(NEO_OBJS)
