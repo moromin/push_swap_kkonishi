@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:46:15 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:15 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/15 21:43:36 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_isdigit_str(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && !ft_isspace(str[i]) && str[i] != '-')
-			return (write(1, "Error\n", 6));
+			return (write(2, "Error\n", 6));
 		if (str[i] == '-')
 			flag = 1;
 		if (str[i++] == ' ')
@@ -37,10 +37,10 @@ int	ft_isdigit_str(char *str)
 		if (flag)
 		{
 			if (!ft_isdigit(str[i]) && str[i] != ' ' && str[i] != '\0')
-				return (write(1, "Error\n", 6));
+				return (write(2, "Error\n", 6));
 			flag++;
 			if ((str[i] == ' ' || !str[i] || !ft_isdigit(tmp)) && flag == 2)
-				return (write(1, "Error\n", 6));
+				return (write(2, "Error\n", 6));
 		}
 	}
 	return (0);
@@ -71,10 +71,8 @@ static long long	ft_atoi_ll(const char *str)
 	{
 		if ((res * 10 + (str[i] - '0')) / 10 != res)
 		{
-			if (sign == -1)
-				return (0);
-			else
-				return (-1);
+			ft_putendl_fd("Error", 2);
+			exit(EXIT_FAILURE);
 		}
 		res = res * 10 + (str[i] - '0');
 		i++;
@@ -92,7 +90,7 @@ int	ft_integer_check(char *str)
 	{
 		res = ft_atoi_ll(&str[i]);
 		if (res > INT_MAX || res < INT_MIN)
-			return (write(1, "Error\n", 6));
+			return (write(2, "Error\n", 6));
 		while (ft_isspace(str[i]) || str[i] == '-')
 			i++;
 		while (ft_isdigit(str[i]))
