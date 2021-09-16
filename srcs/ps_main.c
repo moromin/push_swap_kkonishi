@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:47:02 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:47:03 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:39:25 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int args, char *argv[])
 	a = head_node();
 	argument_check(args, argv);
 	init_node(a, args, argv);
-	size = node_check(a, 0);
+	size = node_check(a, 0, 0);
 	b = head_node();
 	branch_node_size(a, b, size);
 	free_all_node(a);

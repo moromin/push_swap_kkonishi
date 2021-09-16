@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:46:11 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:12 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:21:34 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	swap(t_node *node, int ab_flag, int same_flag)
 	t_node	*node1;
 	t_node	*node2;
 
+	if (node_size(node) < 2)
+		return ;
 	head = node;
 	node1 = head->next;
 	node2 = head->next->next;
@@ -95,6 +97,8 @@ void	push(t_node *n1, t_node *n2, int atob_flag)
 	t_node	*node1;
 	t_node	*node2;
 
+	if (node_size(n1) == 0)
+		return ;
 	head_n1 = n1;
 	node1 = head_n1->next;
 	node1->next->prev = head_n1;

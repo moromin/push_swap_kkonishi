@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:46:18 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:18 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 12:11:48 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	double_node_free(t_node *a, t_node *b)
 {
 	free_all_node(a);
 	free_all_node(b);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 }
 
 void	size_over_six(t_node *a, t_node *b, size_t size)

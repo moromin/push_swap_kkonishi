@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:46:58 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:58 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:40:06 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,14 @@ static void	node_sorted_check(t_node *a, size_t size, int b_flag)
 	}
 }
 
-size_t	node_check(t_node *a, int b_flag)
+size_t	node_check(t_node *a, int b_flag, int c_flag)
 {
 	size_t	size;
 
 	size = 0;
 	node_dup_check(a);
 	size = node_size_check(a);
-	node_sorted_check(a, size, b_flag);
+	if (!c_flag)
+		node_sorted_check(a, size, b_flag);
 	return (size);
 }

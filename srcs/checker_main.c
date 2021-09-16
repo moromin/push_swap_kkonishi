@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:46:33 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:46:33 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:42:08 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,12 @@ int	main(int args, char *argv[])
 {
 	t_node	*a;
 	t_node	*b;
-	size_t	size;
 	char	*cmd;
 
 	a = head_node();
 	argument_check(args, argv);
 	init_node(a, args, argv);
-	size = node_check(a, 1);
+	node_check(a, 1, 1);
 	b = head_node();
 	while (1)
 	{
@@ -82,7 +81,5 @@ int	main(int args, char *argv[])
 		free(cmd);
 	}
 	cmd_sort_check(a, b);
-	free_all_node(a);
-	free_all_node(b);
 	return (0);
 }

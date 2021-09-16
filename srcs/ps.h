@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 00:47:05 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/09/11 00:47:05 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:39:15 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_node(t_node *a, int args, char *argv[]);
 void	free_all_node(t_node *node);
 
 // node_checker.c
-size_t	node_check(t_node *a, int b_flag);
+size_t	node_check(t_node *a, int b_flag, int c_flag);
 
 // branch.c
 void	size_two(t_node *a);

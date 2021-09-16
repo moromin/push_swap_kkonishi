@@ -6,7 +6,7 @@
 /*   By: kkonishi <kkonishi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 18:52:25 by kkonishi          #+#    #+#             */
-/*   Updated: 2021/07/19 21:53:49 by kkonishi         ###   ########.fr       */
+/*   Updated: 2021/09/16 12:03:59 by kkonishi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*d)(void *));
+
+// Add function
+int					ft_strcmp(const char *s1, const char *s2);
 
 #endif

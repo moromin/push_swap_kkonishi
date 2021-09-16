@@ -41,6 +41,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 bonus: $(BONUS_OBJS) $(NAME)
+	make -C $(LIBFT_PATH)
 	make bonus -C $(GNL_PATH)
 	$(CC) $(CFLAGS) $(BONUS_OBJS) -L$(LIBFT_PATH) -lft -L$(GNL_PATH) -lgnl -o $(BONUS_NAME)
 
